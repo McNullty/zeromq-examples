@@ -32,5 +32,37 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
+		
+		<!-- Camel Dependencies -->
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+			</dependency>
+		<dependency>
+			<groupId>org.apache-extras.camel-extra</groupId>
+			<artifactId>camel-zeromq</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>akka-zeromq_2.10</artifactId>
+					<groupId>com.typesafe.akka</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>akka-actor_2.10</artifactId>
+					<groupId>com.typesafe.akka</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>zeromq-scala-binding_2.10</artifactId>
+					<groupId>org.zeromq</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 </project>
