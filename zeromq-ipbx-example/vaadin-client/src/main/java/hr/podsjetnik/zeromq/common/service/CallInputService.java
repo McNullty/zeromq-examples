@@ -8,6 +8,7 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
+import hr.podsjetnik.zeromq.common.data.CallEvent;
 import hr.podsjetnik.zeromq.common.data.CallInput;
 
 public class CallInputService {
@@ -32,4 +33,8 @@ public class CallInputService {
 		return mapper.writeValueAsString(ci);
 	}
 
+	public static String convertJavaToJson(CallEvent event)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		return mapper.writeValueAsString(event);
+	}
 }
