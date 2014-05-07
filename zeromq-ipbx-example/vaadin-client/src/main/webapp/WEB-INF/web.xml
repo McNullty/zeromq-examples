@@ -19,19 +19,15 @@
     </listener>
     
     <!-- Processes application requests -->
-<!--     <servlet> -->
-<!--         <servlet-name>pbx</servlet-name> -->
-<!--         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class> -->
-<!--         <init-param> -->
-<!-- 			<param-name>contextConfigLocation</param-name> -->
-<!-- 			<param-value>/WEB-INF/applicationContext.xml</param-value> -->
-<!-- 		</init-param> -->
-<!--         <load-on-startup>1</load-on-startup> -->
-<!--     </servlet> -->
+    <servlet>
+        <servlet-name>pbx</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
          
-<!--     <servlet-mapping> -->
-<!--         <servlet-name>pbx</servlet-name> -->
-<!--         <url-pattern>/*</url-pattern> -->
-<!--     </servlet-mapping> -->
+    <servlet-mapping>
+        <servlet-name>pbx</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
 	
 </web-app>
