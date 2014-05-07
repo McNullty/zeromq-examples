@@ -18,7 +18,7 @@ public class IpbxRestService {
 
 	@RequestMapping(value = "v1/calls", method = RequestMethod.POST)
 	public @ResponseBody
-	CallOutput createEmployee(@RequestBody CallInput call) {
+	CallOutput callPbx(@RequestBody CallInput call) {
 		ZMQ.Context context = ZMQ.context(1);
 		ZMQ.Socket requester = context.socket(ZMQ.REQ);
 		requester.connect("tcp://localhost:5555");

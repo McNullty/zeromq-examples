@@ -67,8 +67,7 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 
 	@Override
 	public Button getWorkButton() {
-		// TODO Auto-generated method stub
-		return null;
+		return work;
 	}
 
 	@Override
@@ -78,8 +77,7 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 
 	@Override
 	public TextField getNumber() {
-		// TODO Auto-generated method stub
-		return null;
+		return number;
 	}
 
 }

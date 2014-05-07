@@ -27,7 +27,6 @@ public class AppConfig extends SingleRouteCamelConfiguration {
 			public void configure() throws Exception {
 				from("zeromq:tcp://127.0.0.1:5563?socketType=SUBSCRIBE")
 						.process(new MessageProcessor());
-
 			}
 		};
 	}
