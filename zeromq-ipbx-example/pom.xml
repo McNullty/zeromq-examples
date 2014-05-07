@@ -13,6 +13,8 @@
 		<jackson.version>1.9.13</jackson.version>
 		<spring.version>3.2.8.RELEASE</spring.version>
 		<camel.version>2.13.0</camel.version>
+		<vaadin.version>7.1.9</vaadin.version>
+		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -55,42 +57,89 @@
 				<artifactId>spring-webmvc</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<!-- JavaConfig need this library -->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>2.2.2</version>
+			</dependency>
 			
+			<!-- Vaadin -->
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-server</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-client-compiled</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-client</artifactId>
+				<version>${vaadin.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-push</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-themes</artifactId>
+				<version>${vaadin.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>3.0.1</version>
+				<scope>provided</scope>
+			</dependency>
+
 			<!-- Camel Dependencies -->
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-stream</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache-extras.camel-extra</groupId>
-			<artifactId>camel-zeromq</artifactId>
-			<version>${camel.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>akka-zeromq_2.10</artifactId>
-					<groupId>com.typesafe.akka</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>akka-actor_2.10</artifactId>
-					<groupId>com.typesafe.akka</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>zeromq-scala-binding_2.10</artifactId>
-					<groupId>org.zeromq</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-core</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-spring</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-stream</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache-extras.camel-extra</groupId>
+				<artifactId>camel-zeromq</artifactId>
+				<version>${camel.version}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>akka-zeromq_2.10</artifactId>
+						<groupId>com.typesafe.akka</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>akka-actor_2.10</artifactId>
+						<groupId>com.typesafe.akka</groupId>
+					</exclusion>
+					<exclusion>
+						<artifactId>zeromq-scala-binding_2.10</artifactId>
+						<groupId>org.zeromq</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 
 		</dependencies>
 	</dependencyManagement>
