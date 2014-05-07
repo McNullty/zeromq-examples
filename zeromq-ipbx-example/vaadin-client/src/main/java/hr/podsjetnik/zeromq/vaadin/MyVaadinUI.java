@@ -27,7 +27,7 @@ import com.vaadin.ui.UI;
 @SuppressWarnings("serial")
 @Push
 public class MyVaadinUI extends UI {
-	@WebServlet(value = "/*", asyncSupported = true)
+	@WebServlet(urlPatterns = {"/app/*", "/VAADIN/*"}, asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = MyVaadinUI.class, widgetset = "hr.podsjetnik.zeromq.vaadin.AppWidgetSet")
 	public static class Servlet extends VaadinServlet {
 	}
