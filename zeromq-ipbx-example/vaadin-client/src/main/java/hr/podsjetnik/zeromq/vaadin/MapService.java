@@ -21,6 +21,14 @@ public class MapService {
 	public void setMessage(String caller, String message) {
 		map.put(caller, message);
 	}
+	
+	public Boolean contains(String caller){
+		return map.containsKey(caller);
+	}
+	
+	public String remove(String caller){
+		return map.remove(caller);
+	}
 
 	@Override
 	public String toString() {

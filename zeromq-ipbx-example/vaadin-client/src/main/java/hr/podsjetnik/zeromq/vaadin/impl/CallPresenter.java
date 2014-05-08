@@ -12,9 +12,11 @@ import hr.podsjetnik.zeromq.vaadin.MapService;
 public class CallPresenter implements CallViewHandler {
 	
 	private CallView view;
+	private MapService map;
 
 	public CallPresenter(CallView view, MapService map) {
 		this.view = view;
+		this.map = map;
 	}
 
 	@Override
@@ -34,6 +36,10 @@ public class CallPresenter implements CallViewHandler {
 		
 		CallOutput co  = irs.callPbx(ci);
 		System.out.println("output status: " + co.getStatus());
+	}
+	
+	public MapService getMapService(){
+		return map;
 	}
 
 }

@@ -26,6 +26,7 @@ public class MessageProcessor implements Processor {
 		System.out.println(message);
 		
 		CallEvent event = CallInputService.convertJsonEventToJava(message);
+		//TODO: synchronize
 		map.setMessage(event.getExternal_ref(), event.getTimestamp());
 		System.out.println("Dodao u mapu: " + event.getExternal_ref() + ": " + event.getTimestamp());
 		System.out.println(map);
