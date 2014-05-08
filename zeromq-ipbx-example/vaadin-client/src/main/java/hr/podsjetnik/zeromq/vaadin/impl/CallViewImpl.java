@@ -58,6 +58,15 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 
 		work = new Button("Novi prozor");
 		addComponent(work);
+		work.addClickListener(new ClickListener() {
+
+			private static final long serialVersionUID = 1910387531862979808L;
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				UI.getCurrent().getNavigator().navigateTo("work");				
+			}
+		});
 
 		new MessageUpdater().start();
 	}
@@ -88,7 +97,7 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 	}
 
 	public void showNotice(String remove) {
-		Notification call = new Notification(remove, Notification.Type.TRAY_NOTIFICATION);
+		Notification call = new Notification("Poziv uspostavljen u " + remove, Notification.Type.TRAY_NOTIFICATION);
 		call.setDelayMsec(20000);
 		call.setPosition(Position.BOTTOM_RIGHT);
 		call.show(Page.getCurrent());

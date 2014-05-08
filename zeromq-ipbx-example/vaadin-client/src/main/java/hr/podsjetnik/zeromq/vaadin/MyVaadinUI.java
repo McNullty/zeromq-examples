@@ -5,6 +5,7 @@ import hr.podsjetnik.zeromq.vaadin.impl.CallViewImpl;
 import hr.podsjetnik.zeromq.vaadin.impl.LoginPresenter;
 import hr.podsjetnik.zeromq.vaadin.impl.LoginViewImpl;
 import hr.podsjetnik.zeromq.vaadin.impl.UserServiceImpl;
+import hr.podsjetnik.zeromq.vaadin.impl.WorkViewImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.annotation.WebServlet;
@@ -46,6 +47,9 @@ public class MyVaadinUI extends UI {
 		call.init();
 		navigator.addView("call", call);
 		
+		final WorkView work = new WorkViewImpl(map);
+		work.init();
+		navigator.addView("work", work);
 		
 		final LoginView loginView = new LoginViewImpl();
 	    final LoginPresenter loginPresenter = new LoginPresenter(loginView, new UserServiceImpl());
