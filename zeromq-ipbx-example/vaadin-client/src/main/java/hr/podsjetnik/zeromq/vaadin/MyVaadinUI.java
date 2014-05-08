@@ -38,7 +38,7 @@ public class MyVaadinUI extends UI {
 	protected void init(VaadinRequest request) {
 		final Navigator navigator = new Navigator(this, this);
 
-		MapService map = getMapService(request); 
+		MapService map = getMapService(request);
 
 		final CallView call = new CallViewImpl();		
 		final CallViewHandler presenter = new CallPresenter(call, map);

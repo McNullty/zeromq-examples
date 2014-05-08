@@ -1,5 +1,7 @@
 package hr.podsjetnik.zeromq.vaadin.impl;
 
+import com.vaadin.server.VaadinSession;
+
 import hr.podsjetnik.zeromq.common.data.CallInput;
 import hr.podsjetnik.zeromq.common.data.CallOutput;
 import hr.podsjetnik.zeromq.ipbx.IpbxRestService;
@@ -24,7 +26,9 @@ public class CallPresenter implements CallViewHandler {
 		ci.setDestination(number);
 		ci.setSource(caller.toString());
 		ci.setService_id(1);
-		ci.setExternal_ref("uuqu7TohH2m");
+		
+		String user = (String) VaadinSession.getCurrent().getAttribute("username");
+		ci.setExternal_ref(user);
 		
 		IpbxRestService irs = new IpbxRestService();
 		

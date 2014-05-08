@@ -4,7 +4,11 @@ import hr.podsjetnik.zeromq.vaadin.LoginView;
 import hr.podsjetnik.zeromq.vaadin.LoginViewHandler;
 
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinServlet;
+import com.vaadin.server.VaadinServletService;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -16,7 +20,7 @@ public class LoginViewImpl extends VerticalLayout implements LoginView {
 	private LoginViewHandler handler;
 
 	private TextField txtUsername;
-	private TextField txtPassword;
+	private PasswordField txtPassword;
 
 	private Button btnLogin;
 
@@ -29,7 +33,7 @@ public class LoginViewImpl extends VerticalLayout implements LoginView {
 	public void init() {
 		txtUsername = new TextField("Username:");
 		addComponent(txtUsername);
-		txtPassword = new TextField("Password:");
+		txtPassword = new PasswordField("Password:");
 		addComponent(txtPassword);
 
 		btnLogin = new Button("Login");
@@ -51,7 +55,7 @@ public class LoginViewImpl extends VerticalLayout implements LoginView {
 	}
 
 	@Override
-	public TextField getTxtPassword() {
+	public PasswordField getTxtPassword() {
 		return txtPassword;
 	}
 
@@ -65,7 +69,8 @@ public class LoginViewImpl extends VerticalLayout implements LoginView {
 	}
 
 	@Override
-	public void afterSuccessfulLogin() {
+	public void afterSuccessfulLogin(String user) {
+		VaadinSession.getCurrent().setAttribute("username", user);
 		UI.getCurrent().getNavigator().navigateTo("call");
 	}
 

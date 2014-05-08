@@ -5,6 +5,7 @@ import hr.podsjetnik.zeromq.vaadin.LoginViewHandler;
 import hr.podsjetnik.zeromq.vaadin.UserService;
 
 import com.vaadin.server.ServiceException;
+import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 
 public class LoginPresenter implements LoginViewHandler {
@@ -20,7 +21,7 @@ public class LoginPresenter implements LoginViewHandler {
   @Override
   public void login() {
     final TextField txtUsername = view.getTxtUsername();
-    final TextField txtPassword = view.getTxtPassword();
+    final PasswordField txtPassword = view.getTxtPassword();
 
     final String username = txtUsername.getValue();
     final String password = txtPassword.getValue();
@@ -31,7 +32,7 @@ public class LoginPresenter implements LoginViewHandler {
       try {
         service.login(username, password);
 
-        view.afterSuccessfulLogin();
+        view.afterSuccessfulLogin(username);
       } catch (final ServiceException e) {
         view.afterFailedLogin();
       }
