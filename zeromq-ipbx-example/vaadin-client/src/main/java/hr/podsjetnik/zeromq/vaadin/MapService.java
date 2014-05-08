@@ -21,4 +21,9 @@ public class MapService {
 	public void setMessage(String caller, String message) {
 		map.put(caller, message);
 	}
+
+	@Override
+	public String toString() {
+		return "MapService [map=" + map + "]";
+	}
 }

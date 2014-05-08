@@ -13,10 +13,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @ComponentScan(basePackages = {"hr.podsjetnik.zeromq.ipbx"})
 public class AppConfig extends SingleRouteCamelConfiguration {
+	private MapService map = new MapService();
 
 	@Bean(name = "mapService")
 	public MapService getMapService() {
-		return new MapService();
+		return map;
 	}
 
 	@Override
@@ -26,7 +27,7 @@ public class AppConfig extends SingleRouteCamelConfiguration {
 			@Override
 			public void configure() throws Exception {
 				from("zeromq:tcp://127.0.0.1:5563?socketType=SUBSCRIBE")
-						.process(new MessageProcessor());
+						.process(new MessageProcessor(map));
 			}
 		};
 	}

@@ -37,4 +37,11 @@ public class CallInputService {
 			throws JsonGenerationException, JsonMappingException, IOException {
 		return mapper.writeValueAsString(event);
 	}
+	
+	public static CallEvent convertJsonEventToJava(String input)
+			throws JsonParseException, JsonMappingException, IOException {
+		CallEvent ci = mapper.readValue(input, CallEvent.class);
+
+		return ci;
+	}
 }

@@ -4,8 +4,6 @@ import hr.podsjetnik.zeromq.vaadin.LoginView;
 import hr.podsjetnik.zeromq.vaadin.LoginViewHandler;
 
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.server.VaadinServletService;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.PasswordField;

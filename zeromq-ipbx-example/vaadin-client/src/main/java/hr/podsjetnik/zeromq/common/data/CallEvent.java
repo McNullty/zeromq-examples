@@ -5,6 +5,7 @@ public class CallEvent {
 	private String event;
 	private String call_ref;
 	private String external_ref;
+	private String timestamp;
 	private String call_state;
 	private String originate_response;
 	private String originate_reason;
@@ -100,5 +101,13 @@ public class CallEvent {
 
 	public void setChannel2_state(String channel2_state) {
 		this.channel2_state = channel2_state;
+	}
+
+	public String getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		this.timestamp = timestamp;
 	}
 }

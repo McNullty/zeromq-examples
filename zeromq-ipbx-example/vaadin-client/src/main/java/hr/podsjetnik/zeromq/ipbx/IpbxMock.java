@@ -1,5 +1,8 @@
 package hr.podsjetnik.zeromq.ipbx;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import hr.podsjetnik.zeromq.common.data.CallEvent;
 import hr.podsjetnik.zeromq.common.data.CallInput;
 import hr.podsjetnik.zeromq.common.service.CallInputService;
@@ -15,6 +18,8 @@ public class IpbxMock {
 		Context context = ZMQ.context(1);
 		Socket publisher = context.socket(ZMQ.PUB);
 		Socket responder = context.socket(ZMQ.REP);
+		
+		SimpleDateFormat sfd = new SimpleDateFormat("kk:mm:ss dd.MM.yyyy");
 
 		responder.bind("tcp://*:5555");
 		publisher.bind("tcp://*:5563");
@@ -33,6 +38,7 @@ public class IpbxMock {
 			event.setEvent("link");
 			event.setCall_ref("76u0wdd6b4db36zuuxgtvs6n2");
 			event.setExternal_ref(ci.getExternal_ref());
+			event.setTimestamp(sfd.format(new Date()));
 			event.setCall_state("PCS_TALKING");
 			event.setOriginate_reason("4");
 			event.setOriginate_response("Success");
@@ -42,7 +48,6 @@ public class IpbxMock {
 			event.setChannel1_state("CS_UP");
 			event.setChannel2_state("CS_UP");
 
-			publisher.sendMore("A");
 			publisher.send(CallInputService.convertJavaToJson(event));
 
 		}
