@@ -67,10 +67,15 @@
 		</dependency>
 
 		<!-- ZeroMQ -->
-		<dependency>
-			<groupId>org.zeromq</groupId>
-			<artifactId>jzmq</artifactId>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.zeromq</groupId> -->
+<!-- 			<artifactId>jzmq</artifactId> -->
+<!-- 		</dependency> -->
+<dependency>
+        <groupId>org.zeromq</groupId>
+        <artifactId>jeromq</artifactId>
+        <version>0.3.3</version>
+</dependency>
 
 		<!-- Camel Dependencies -->
 		<dependency>
