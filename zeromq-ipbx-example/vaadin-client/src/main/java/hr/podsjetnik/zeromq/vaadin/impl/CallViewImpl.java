@@ -64,7 +64,7 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				UI.getCurrent().getNavigator().navigateTo("work");				
+				UI.getCurrent().getNavigator().navigateTo("work");
 			}
 		});
 
@@ -97,11 +97,12 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 	}
 
 	public void showNotice(String remove) {
-		Notification call = new Notification("Poziv uspostavljen u " + remove, Notification.Type.TRAY_NOTIFICATION);
+		Notification call = new Notification("Poziv uspostavljen u " + remove,
+				Notification.Type.TRAY_NOTIFICATION);
 		call.setDelayMsec(20000);
 		call.setPosition(Position.BOTTOM_RIGHT);
 		call.show(Page.getCurrent());
-		
+
 	}
 
 	class MessageUpdater extends Thread {
@@ -114,18 +115,20 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 					e.printStackTrace();
 				}
 
-				final String user = (String) VaadinSession.getCurrent().getAttribute(
-						"username");
+				final String user = (String) VaadinSession.getCurrent()
+						.getAttribute("username");
 				final MapService map = presenter.getMapService();
-				// TODO: synchronize
-				if (map.contains(user)) {
-					getUI().access(new Runnable() {
-						
-						@Override
-						public void run() {
-							showNotice(map.remove(user));
-						}
-					});
+
+				synchronized (map) {
+					if (map.contains(user)) {
+						getUI().access(new Runnable() {
+
+							@Override
+							public void run() {
+								showNotice(map.remove(user));
+							}
+						});
+					}
 				}
 			}
 		}
