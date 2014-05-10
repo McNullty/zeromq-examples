@@ -3,7 +3,6 @@ package hr.podsjetnik.zeromq.vaadin.impl;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.shared.Position;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Notification;
@@ -58,7 +57,6 @@ public class WorkViewImpl extends VerticalLayout implements WorkView {
 		Notification call = new Notification("Poziv uspostavljen u " + remove,
 				Notification.Type.TRAY_NOTIFICATION);
 		call.setDelayMsec(20000);
-		//call.setPosition(Position.BOTTOM_RIGHT);
 		call.show(Page.getCurrent());
 	}
 
