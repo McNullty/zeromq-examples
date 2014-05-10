@@ -3,8 +3,10 @@ package hr.podsjetnik.zeromq.vaadin.impl;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.ListSelect;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
@@ -32,21 +34,28 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 	public void enter(ViewChangeEvent event) {
 		updater = new MessageUpdater();
 		updater.start();
+		System.out.println("Started Call updater");
 	}
 
 	@Override
 	public void init() {
+		HorizontalLayout inputs = new HorizontalLayout();		
 		callerId = new ListSelect("Izaberi broj pozivatelja");
 		for (int i = 0; i < 3; i++) {
 			callerId.addItem(330 + i);
 			callerId.setItemCaption(330 + i, (new Integer(330 + i)).toString());
 		}
 		callerId.setNullSelectionAllowed(false);
-		addComponent(callerId);
+		inputs.addComponent(callerId);
+		inputs.setComponentAlignment(callerId, Alignment.MIDDLE_CENTER);
 
 		number = new TextField("Telefonski broj:");
-		addComponent(number);
+		inputs.addComponent(number);
+		inputs.setComponentAlignment(number, Alignment.MIDDLE_CENTER);
+		addComponent(inputs);
+		setComponentAlignment(inputs, Alignment.MIDDLE_CENTER);
 
+		HorizontalLayout buttons = new HorizontalLayout();
 		call = new Button("Nazovi");
 		call.addClickListener(new ClickListener() {
 
@@ -56,8 +65,9 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 			public void buttonClick(ClickEvent event) {
 				presenter.callPbx();
 			}
-		});
-		addComponent(call);
+		});		
+		buttons.addComponent(call);
+		buttons.setComponentAlignment(call, Alignment.MIDDLE_CENTER);
 
 		work = new Button("Novi prozor");
 		addComponent(work);
@@ -68,9 +78,19 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				updater.setStop();
+				System.out.println("Stopped Call updater");
 				UI.getCurrent().getNavigator().navigateTo("work");
 			}
 		});
+		buttons.addComponent(work);
+		buttons.setComponentAlignment(work, Alignment.MIDDLE_CENTER);
+		
+		addComponent(buttons);
+		setComponentAlignment(buttons, Alignment.MIDDLE_CENTER);
+		
+		setSpacing(true);
+		setMargin(true);
+		//setSizeFull();
 	}
 
 	@Override

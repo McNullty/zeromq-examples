@@ -31,6 +31,7 @@ public class WorkViewImpl extends VerticalLayout implements WorkView {
 	public void enter(ViewChangeEvent event) {
 		updater = new MessageUpdater();
 		updater.start();
+		System.out.println("Started Work updater");
 	}
 
 	@Override
@@ -47,6 +48,7 @@ public class WorkViewImpl extends VerticalLayout implements WorkView {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				updater.setStop();
+				System.out.println("Stopped Work updater");
 				UI.getCurrent().getNavigator().navigateTo("call");
 			}
 		});
