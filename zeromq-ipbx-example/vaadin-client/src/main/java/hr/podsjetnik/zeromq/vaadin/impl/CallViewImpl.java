@@ -27,8 +27,12 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 	private Button work;
 	private CallViewHandler presenter;
 
+	private MessageUpdater updater;
+
 	@Override
 	public void enter(ViewChangeEvent event) {
+		updater = new MessageUpdater();
+		updater.start();
 	}
 
 	@Override
@@ -64,11 +68,10 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
+				updater.setStop();
 				UI.getCurrent().getNavigator().navigateTo("work");
 			}
 		});
-
-		new MessageUpdater().start();
 	}
 
 	@Override
@@ -100,15 +103,21 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 		Notification call = new Notification("Poziv uspostavljen u " + remove,
 				Notification.Type.TRAY_NOTIFICATION);
 		call.setDelayMsec(20000);
-		call.setPosition(Position.BOTTOM_RIGHT);
+//		call.setPosition(Position.BOTTOM_RIGHT);
 		call.show(Page.getCurrent());
 
 	}
 
 	class MessageUpdater extends Thread {
+		private boolean stop = false;
+
+		public void setStop() {
+			stop = true;
+		}
+
 		@Override
 		public void run() {
-			while (true) {
+			while (!stop) {
 				try {
 					Thread.sleep(800);
 				} catch (InterruptedException e) {
@@ -121,13 +130,15 @@ public class CallViewImpl extends VerticalLayout implements CallView {
 
 				synchronized (map) {
 					if (map.contains(user)) {
-						getUI().access(new Runnable() {
+						if (!stop) {
+							getUI().access(new Runnable() {
 
-							@Override
-							public void run() {
-								showNotice(map.remove(user));
-							}
-						});
+								@Override
+								public void run() {
+									showNotice(map.remove(user));
+								}
+							});
+						}
 					}
 				}
 			}

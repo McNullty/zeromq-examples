@@ -22,12 +22,16 @@ public class WorkViewImpl extends VerticalLayout implements WorkView {
 	private MapService map;
 	private Button back;
 
+	private MessageUpdater updater;
+
 	public WorkViewImpl(final MapService map) {
 		this.map = map;
 	}
 
 	@Override
 	public void enter(ViewChangeEvent event) {
+		updater = new MessageUpdater();
+		updater.start();
 	}
 
 	@Override
@@ -43,26 +47,31 @@ public class WorkViewImpl extends VerticalLayout implements WorkView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
+				updater.setStop();
 				UI.getCurrent().getNavigator().navigateTo("call");
 			}
 		});
 		addComponent(back);
-
-		new MessageUpdater().start();
 	}
 
 	public void showNotice(final String remove) {
 		Notification call = new Notification("Poziv uspostavljen u " + remove,
 				Notification.Type.TRAY_NOTIFICATION);
 		call.setDelayMsec(20000);
-		call.setPosition(Position.BOTTOM_RIGHT);
+		//call.setPosition(Position.BOTTOM_RIGHT);
 		call.show(Page.getCurrent());
 	}
 
 	class MessageUpdater extends Thread {
+		private boolean stop = false;
+
+		public void setStop() {
+			stop = true;
+		}
+
 		@Override
 		public void run() {
-			while (true) {
+			while (!stop) {
 				try {
 					Thread.sleep(800);
 				} catch (InterruptedException e) {
@@ -74,13 +83,15 @@ public class WorkViewImpl extends VerticalLayout implements WorkView {
 
 				synchronized (map) {
 					if (map.contains(user)) {
-						getUI().access(new Runnable() {
+						if (!stop) {
+							getUI().access(new Runnable() {
 
-							@Override
-							public void run() {
-								showNotice(map.remove(user));
-							}
-						});
+								@Override
+								public void run() {
+									showNotice(map.remove(user));
+								}
+							});
+						}
 					}
 				}
 			}
